@@ -1,7 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
-    <TargetFrameworks>net7.0;net6.0;net472;netstandard2.0</TargetFrameworks>
+    <!--
+      https://learn.microsoft.com/en-us/dotnet/standard/library-guidance/cross-platform-targeting
+      recomends also adding a net461 reference (when actuall targeting .NET Standard 2.0)
+      to work around an issue with .NET Framework 4.6.1 - 4.7.1.
+      Unfortunately System.Diagnostics.DiagnosticSource only supports .NET Framework 4.6.2+,
+      so ne need to skip 4.6.1, but can still support 4.6.2 - 4.7.1.
+    -->
+    <TargetFrameworks>net7.0;net6.0;net462;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
@@ -12,7 +19,14 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Serilog" Version="2.10.0" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp' ">
+    <!--
+      'Microsoft.NET.Sdk' will automatically add an implicit "Microsoft.NETCore.App" FrameworkReference for the .NET Core targets,
+      but for the old .NET frameworks we need an explicit add references to the required nuget package(s).
+    -->
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="7.0.2" />
   </ItemGroup>
 
 </Project>

@@ -72,7 +72,8 @@ public class ActivityEnricherTest
         {
             ParentId = null!,
         });
-        Assert.Equal($"The property must not be empty (Parameter '{nameof(SpanLogEventPropertiesNames.ParentId)}')", exception.Message);
+        Assert.Contains("The property must not be empty", exception.Message, StringComparison.InvariantCultureIgnoreCase);
+        Assert.Contains(nameof(SpanLogEventPropertiesNames.ParentId), exception.Message, StringComparison.InvariantCultureIgnoreCase);
         Assert.Equal(nameof(SpanLogEventPropertiesNames.ParentId), exception.ParamName);
     }
 
@@ -84,7 +85,8 @@ public class ActivityEnricherTest
         {
             TraceId = null!,
         });
-        Assert.Equal($"The property must not be empty (Parameter '{nameof(SpanLogEventPropertiesNames.TraceId)}')", exception.Message);
+        Assert.Contains("The property must not be empty", exception.Message, StringComparison.InvariantCultureIgnoreCase);
+        Assert.Contains(nameof(SpanLogEventPropertiesNames.TraceId), exception.Message, StringComparison.InvariantCultureIgnoreCase);
         Assert.Equal(nameof(SpanLogEventPropertiesNames.TraceId), exception.ParamName);
     }
 
@@ -96,7 +98,8 @@ public class ActivityEnricherTest
         {
             SpanId = null!,
         });
-        Assert.Equal($"The property must not be empty (Parameter '{nameof(SpanLogEventPropertiesNames.SpanId)}')", exception.Message);
+        Assert.Contains("The property must not be empty", exception.Message, StringComparison.InvariantCultureIgnoreCase);
+        Assert.Contains(nameof(SpanLogEventPropertiesNames.SpanId), exception.Message, StringComparison.InvariantCultureIgnoreCase);
         Assert.Equal(nameof(SpanLogEventPropertiesNames.SpanId), exception.ParamName);
     }
 

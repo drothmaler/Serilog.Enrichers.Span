@@ -66,7 +66,8 @@ public class ActivityOperationNameEnricherTest
         {
             OperationName = null!,
         });
-        Assert.Equal($"The property must not be empty (Parameter '{nameof(SpanLogEventPropertiesNames.OperationName)}')", exception.Message);
+        Assert.Contains("The property must not be empty", exception.Message, StringComparison.InvariantCultureIgnoreCase);
+        Assert.Contains(nameof(SpanLogEventPropertiesNames.OperationName), exception.Message, StringComparison.InvariantCultureIgnoreCase);
         Assert.Equal(nameof(SpanLogEventPropertiesNames.OperationName), exception.ParamName);
     }
 
